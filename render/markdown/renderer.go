@@ -12,12 +12,13 @@ import (
 	"github.com/gomarkdown/markdown/ast"
 	"github.com/gomarkdown/markdown/html"
 	"github.com/mmarkdown/mmark/mast"
+	"github.com/mmarkdown/mmark/render/markdown/ansi"
 )
 
 // Flags control optional behavior of Markdown renderer.
 type Flags int
 
-// HTML renderer configuration options.
+// Markdown renderer configuration options.
 const (
 	FlagsNone Flags = 0
 
@@ -30,6 +31,8 @@ type RendererOptions struct {
 	Flags Flags // Flags allow customizing this renderer's behavior
 
 	TextWidth int
+
+	TTY bool // if true we're outputing to a tty
 
 	// if set, called at the start of RenderNode(). Allows replacing rendering of some nodes
 	RenderNodeHook html.RenderNodeFunc
@@ -623,11 +626,23 @@ func (r *Renderer) RenderNode(w io.Writer, node ast.Node, entering bool) ast.Wal
 	case *ast.Callout:
 		r.callout(w, node, entering)
 	case *ast.Emph:
-		r.outOneOf(w, entering, "*", "*")
+		if r.opts.TTY {
+			r.outOneOf(w, entering, ansi.Italics, ansi.ItalicsOff)
+		} else {
+			r.outOneOf(w, entering, "*", "*")
+		}
 	case *ast.Strong:
-		r.outOneOf(w, entering, "**", "**")
+		if r.opts.TTY {
+			r.outOneOf(w, entering, ansi.Bold, ansi.BoldOff)
+		} else {
+			r.outOneOf(w, entering, "**", "**")
+		}
 	case *ast.Del:
-		r.outOneOf(w, entering, "~~", "~~")
+		if r.opts.TTY {
+			r.outOneOf(w, entering, ansi.Strikethrough, ansi.StrikethroughOff)
+		} else {
+			r.outOneOf(w, entering, "~~", "~~")
+		}
 	case *ast.Citation:
 		r.citation(w, node, entering)
 	case *ast.DocumentMatter:

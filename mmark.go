@@ -29,6 +29,7 @@ var (
 	flagIndex    = flag.Bool("index", true, "generate an index at the end of the document")
 	flagTwo      = flag.Bool("2", false, "generate RFC 7749 XML")
 	flagMarkdown = flag.Bool("markdown", false, "generate markdown (experimental)")
+	flagTTY      = flag.Bool("tty", false, "when outputting markdown to a TTY use ANSI escapes")
 	flagWrite    = flag.Bool("w", false, "write to source file when generating markdown")
 	flagWidth    = flag.Int("width", 100, "text width when generating markdown")
 	flagUnsafe   = flag.Bool("unsafe", false, "allow unsafe includes")
@@ -154,7 +155,7 @@ func main() {
 
 			renderer = xml2.NewRenderer(opts)
 		case *flagMarkdown:
-			opts := mmarkout.RendererOptions{TextWidth: *flagWidth}
+			opts := mmarkout.RendererOptions{TextWidth: *flagWidth, TTY: *flagTTY}
 			renderer = mmarkout.NewRenderer(opts)
 		default:
 			opts := xml.RendererOptions{

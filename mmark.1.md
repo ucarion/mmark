@@ -105,6 +105,10 @@ markdown files.
 
 :  output (normalized) markdown.
 
+**tty**
+
+: output ANSI escape codes when rendering markdown.
+
 **-unsafe**
 
 :  allow includes from anywhere in the filesystem, otherwise they are only allowed *under* the
