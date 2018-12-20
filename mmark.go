@@ -15,6 +15,7 @@ import (
 	"github.com/mmarkdown/mmark/mparser"
 	mmarkout "github.com/mmarkdown/mmark/render/markdown"
 	"github.com/mmarkdown/mmark/render/mhtml"
+	"github.com/mmarkdown/mmark/render/text"
 	"github.com/mmarkdown/mmark/render/xml"
 	"github.com/mmarkdown/mmark/render/xml2"
 )
@@ -29,6 +30,7 @@ var (
 	flagIndex    = flag.Bool("index", true, "generate an index at the end of the document")
 	flagTwo      = flag.Bool("2", false, "generate RFC 7749 XML")
 	flagMarkdown = flag.Bool("markdown", false, "generate markdown (experimental)")
+	flagText     = flag.Bool("text", false, "generate text for ANSI escapes")
 	flagWrite    = flag.Bool("w", false, "write to source file when generating markdown")
 	flagWidth    = flag.Int("width", 100, "text width when generating markdown")
 	flagUnsafe   = flag.Bool("unsafe", false, "allow unsafe includes")
@@ -156,6 +158,9 @@ func main() {
 		case *flagMarkdown:
 			opts := mmarkout.RendererOptions{TextWidth: *flagWidth}
 			renderer = mmarkout.NewRenderer(opts)
+		case *flagText:
+			opts := text.RendererOptions{TextWidth: *flagWidth}
+			renderer = text.NewRenderer(opts)
 		default:
 			opts := xml.RendererOptions{
 				Flags:    xml.CommonFlags,

@@ -105,6 +105,10 @@ markdown files.
 
 :  output (normalized) markdown.
 
+**-text**
+
+:  output text with ANSI codes (aim to be somewhat similar to a manual page).
+
 **-unsafe**
 
 :  allow includes from anywhere in the filesystem, otherwise they are only allowed *under* the
