@@ -5,6 +5,7 @@
 .SH NAME
 .PP
 mmark \[en] generate XML, HTML or markdown from mmark markdown
+documents.
 .SH SYNOPSIS
 .PP
 \f[B]mmark\f[] [\f[B]OPTIONS\f[]] [\f[I]FILE...\f[]]
@@ -22,6 +23,59 @@ Mmark can produce xml2rfc (aforementioned RFC 7991), RFC 7749 (xml2rfc
 version 2), HTML5 and markdown output.
 .PP
 The syntax is detailed at <https://mmark.nl/syntax>.
+.PP
+Compared to other markdown variants mmark adds:
+.IP \[bu] 2
+(Extended) Title blokto specify authors and IETF specific bits.
+.IP \[bu] 2
+Special sections for abstracts, prefaces or notes.
+.IP \[bu] 2
+Including other files with the option to specify line ranges, regular
+expressions and/or prefixing each line with a custom string.
+.IP \[bu] 2
+Document divisions: front matter, main matter and back matter.
+.IP \[bu] 2
+Captions for code, tables, quotes and subfigures.
+.IP \[bu] 2
+Asides for small notes.
+.IP \[bu] 2
+Figures and Subfigures that allow for grouping images into subfigures as
+well as giving a single image metadata (a link, attributes, etc.).
+.IP \[bu] 2
+Block Level Attributes that allow to specify attributes, classes and IDs
+for elements.
+.IP \[bu] 2
+Indices to mark an item (and/or a subitem) to be referenced in the
+document index.
+.IP \[bu] 2
+Citations and adding XML References (those used by the IETF).
+.IP \[bu] 2
+Cross references: short form of referencing a section in the document.
+.IP \[bu] 2
+Super\- and Subscript.
+.IP \[bu] 2
+Callouts in code and text.
+.IP \[bu] 2
+BCP14 (RFC 2119) keyword detection.
+.SS RFC 7749
+.PP
+This is currently the XML format used by the RFC editor for accepting
+Internet\-Drafts.
+Some of these turn into RFCs.
+For getting text output you\[aq]ll need xml2rfc for the actual
+conversion.
+.SS RFC 7991
+.PP
+This is the future XML format used by the RFC editor for accepting
+Internet\-Drafts.
+A valid markdown document can be turned in RFC 7749 or RFC 7991 XML.
+.SS HTML5
+.PP
+The HTML5 renderer outputs HTML.
+.SS Markdown
+.PP
+Mmark can also be "translated" into markdown again.
+This is a useful feature for auto\-formatting markdown files.
 .SH OPTIONS
 .TP
 .B \f[B]\-ast\f[]
@@ -59,6 +113,12 @@ output (normalized) markdown.
 .RS
 .RE
 .TP
+.B \f[B]\-text\f[]
+output text with ANSI codes (aim to be somewhat similar to a manual
+page).
+.RS
+.RE
+.TP
 .B \f[B]\-unsafe\f[]
 allow includes from anywhere in the filesystem, otherwise they are only
 allowed \f[I]under\f[] the current document.
@@ -93,6 +153,6 @@ show mmark\[aq]s version.
 .SH ALSO SEE
 .PP
 RFC 7991 and RFC 7749.
-The main site for Mmark is <https://mmark.nl>
+The main site for Mmark is mmark.nl (https://mmark.nl).
 .SH AUTHORS
 Mmark Authors.

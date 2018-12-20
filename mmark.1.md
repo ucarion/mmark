@@ -137,4 +137,4 @@ markdown files.
 
 # ALSO SEE
 
-RFC 7991 and RFC 7749. The main site for Mmark is [https://mmark.nl](https://mmark.nl).
+RFC 7991 and RFC 7749. The main site for Mmark is [mmark.nl](https://mmark.nl).
